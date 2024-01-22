@@ -5,9 +5,24 @@
 geographical data.
 
 """
+import math
+from haversine import haversine, Unit
 
 from .utils import sorted_by_key  # noqa
 
+
+def stations_by_distance(stations, p):
+    """ this function calculates the distance of a station to a position with coordinate p
+        haversine method is used to calculate distance here
+        return a list of tuples (station_name,distance_to_p) and the list is sorted by distance
+    """
+    list_station_distance = []
+    for i in range(len(stations)):
+        d = haversine((stations[i].coord[0],stations[i].coord[1]),p)
+        list_station_distance.append((stations[i],d))
+    return sorted_by_key(list_station_distance,1)
+
+  
 """ [stations_within_radius] uses the haversine function to find the distance between the station and 
 the centre, then compares that to the radius. If the distance is less than the radius the station is 
 added to the output list.
@@ -48,3 +63,30 @@ def stations_by_river(stations):
                 stationsonriver.append(station)
         dictionary[river] = stationsonriver
     return dictionary 
+
+
+
+def rivers_by_station_number(stations, N):
+    """
+       determines the N rivers with the greatest number of monitoring stations. 
+       It should return a list of (river name, number of stations) tuples, sorted by the number of stations. 
+       In the case that there are more rivers with the same number of stations as the N th entry, include these rivers in the list.
+    """
+    River_linked_to_station = stations_by_river(stations)
+    list_River_linked_to_station = []
+    for i in River_linked_to_station:
+        list_River_linked_to_station.append((i,len(River_linked_to_station[i])))
+    list_River_linked_to_station = sorted_by_key(list_River_linked_to_station,1)
+    list_River_linked_to_station.reverse()
+    result = []
+    end = N-1
+    for i in range(N-1,len(list_River_linked_to_station)):
+        if list_River_linked_to_station[i][1] == list_River_linked_to_station[end][1]:
+            end = i
+        else:
+            break
+    for i in range(end+1):
+        result.append(list_River_linked_to_station[i])
+    return result
+
+    
