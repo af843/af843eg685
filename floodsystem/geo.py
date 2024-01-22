@@ -25,8 +25,26 @@ def stations_within_radius(stations, centre, r):
 river attribute to the set, a set is used to prevent duplicate entries which would be an issue if
 using a list.
 """
+
 def rivers_with_station(stations):
     rivers = set()
     for station in stations:
         rivers.add(station.river)
     return rivers
+
+""" [stations_by_river] creates a list of rivers using the rivers_with_station function above, then 
+iterates over the rivers, for each river checking the list of stations to assemble a list of stations on
+that river. The list of stations is added to the dictionary at the end of the process with the key 
+being the name of the river
+"""
+
+def stations_by_river(stations):
+    rivers = rivers_with_station(stations)
+    dictionary = {}
+    for river in rivers:
+        stationsonriver = []
+        for station in stations:
+            if station.river == river:
+                stationsonriver.append(station)
+        dictionary[river] = stationsonriver
+    return dictionary 
