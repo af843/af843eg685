@@ -62,3 +62,25 @@ def stations_by_river(stations):
                 stationsonriver.append(station)
         dictionary[river] = stationsonriver
     return dictionary 
+
+
+
+def rivers_by_station_number(stations, N):
+    River_linked_to_station = stations_by_river(stations)
+    list_River_linked_to_station = []
+    for i in River_linked_to_station:
+        list_River_linked_to_station.append((i,len(River_linked_to_station[i])))
+    list_River_linked_to_station = sorted_by_key(list_River_linked_to_station,1)
+    list_River_linked_to_station.reverse()
+    result = []
+    end = N-1
+    for i in range(N-1,len(list_River_linked_to_station)):
+        if list_River_linked_to_station[i][1] == list_River_linked_to_station[end][1]:
+            end = i
+        else:
+            break
+    for i in range(end+1):
+        result.append(list_River_linked_to_station[i])
+    return result
+
+    
