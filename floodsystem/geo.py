@@ -26,7 +26,6 @@ def haversine(cone, ctwo):
 def stations_within_radius(stations, centre, r):
     stations_in_range = []
     for station in stations:
-        print(station.name)
         if haversine(centre, station.coord) < r:
             stations_in_range.append(station)
     return stations_in_range
