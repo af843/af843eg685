@@ -1,6 +1,10 @@
+""" import methods from other files"""
 from floodsystem.stationdata import build_station_list
 from floodsystem.station import inconsistent_typical_range_stations
 
+"""
+output inconsistent stations
+"""
 stations = build_station_list()
 inconsistent_station = inconsistent_typical_range_stations(stations)
 inconsistent_station_name = []
