@@ -20,9 +20,11 @@ Airenames = []
 Camnames =[]
 Thamesnames =[]
 
-for stationa, stationc, stationt in zip(Aire, Cam, Thames):
+for stationa in Aire:
     Airenames.append(stationa.name)
+for stationc in Cam:    
     Camnames.append(stationc.name)
+for stationt in Thames:
     Thamesnames.append(stationt.name)
 
 print(f"Stations on the river Aire are {sorted(Airenames)}")
