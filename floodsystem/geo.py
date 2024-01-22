@@ -20,3 +20,13 @@ def stations_within_radius(stations, centre, r):
         if haversine(centre, station.coord) < r:
             stations_in_range.append(station)
     return stations_in_range
+
+""" [rivers_with_station] creates an empty set of rivers, then iterates over all stations adding their 
+river attribute to the set, a set is used to prevent duplicate entries which would be an issue if
+using a list.
+"""
+def rivers_with_station(stations):
+    rivers = set()
+    for station in stations:
+        rivers.add(station.river)
+    return rivers
