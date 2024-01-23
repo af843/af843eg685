@@ -14,6 +14,15 @@ def test_stations_within_radius():
     assert type(stations_within_radius(stations, (52.2053, 0.1218), 100)) == list
     assert type(stations_within_radius(stations, (52.2053, 0.1218), 100)[0]) == MonitoringStation
 
+def test_rivers_with_station():
+    from floodsystem.geo import rivers_with_station
+    from floodsystem.stationdata import build_station_list
+    stations = build_station_list()
+    assert len(rivers_with_station(stations)) < len(stations)
+    assert len(rivers_with_station([])) == 0
+    assert type(rivers_with_station(stations)) == set
+    assert type(list(rivers_with_station(stations))[0]) == str
+
 def test_stations_by_river():
     from floodsystem.geo import stations_by_river, rivers_with_station
     from floodsystem.stationdata import build_station_list
