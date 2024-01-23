@@ -1,8 +1,7 @@
-from floodsystem.geo import stations_by_distance
+from floodsystem.geo import stations_by_distance,stations_within_radius,rivers_with_station,stations_by_river,rivers_by_station_number
 from floodsystem.station import MonitoringStation
+from floodsystem.stationdata import build_station_list
 from haversine import haversine, Unit
-from floodsystem.geo import rivers_by_station_number
-
 
 def test_stations_by_distance():
     p = (0,0)
@@ -10,9 +9,6 @@ def test_stations_by_distance():
     result = stations_by_distance(stations, p)
     assert result[0] == (stations[0],haversine((0,0),p))
     assert result[1] == (stations[1],haversine((1,1),p))
-
-test_stations_by_distance()
-
 def test_rivers_by_station_number():
     stations = [MonitoringStation("-","-","1",(0,0),(0,0),"Clare","-"),
                 MonitoringStation("-","-","2",(0,0),(0,0),"Clare","-"),
@@ -40,14 +36,7 @@ def test_rivers_by_station_number():
     result_1 = rivers_by_station_number(stations, 2)
     result_2 = rivers_by_station_number(stations, 3)
     assert result_1 == [("Clare",6),("Kings",5)]
-    assert result_2 == [("Clare",6),("Kings",5),("Jhons",4),("Trinity",4)] or [("Clare",6),("Kings",5),("Trinity",4),("Jhons",4)]
-
-test_rivers_by_station_number()
-    
-from floodsystem.station import MonitoringStation
-from floodsystem.geo import stations_within_radius,rivers_with_station,stations_by_river
-from floodsystem.stationdata import build_station_list
-
+    assert result_2 == [("Clare",6),("Kings",5),("Jhons",4),("Trinity",4)] or [("Clare",6),("Kings",5),("Trinity",4),("Jhons",4)]    
 def test_stations_within_radius():   
     stations = build_station_list()
     assert len(stations_within_radius(stations, (52.2053, 0.1218), 100)) < len(stations) #output should be fewer than
@@ -69,4 +58,4 @@ def test_stations_by_river():
     assert len(stations_by_river(stations)) < len(stations)
     assert type(stations_by_river(stations)) == dict
     assert type(stations_by_river(stations)['River Cam']) == list
-    assert type(stations_by_river(stations)['River Cam
+    assert type(stations_by_river(stations)['River Cam'][0]) == MonitoringStation
