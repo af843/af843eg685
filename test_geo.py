@@ -15,6 +15,13 @@ def test_stations_within_radius():
     assert type(stations_within_radius(stations, (52.2053, 0.1218), 100)[0]) == MonitoringStation
 
 def test_stations_by_river():
-    from floodsystem.geo import stations_by_river
+    from floodsystem.geo import stations_by_river, rivers_with_station
     from floodsystem.stationdata import build_station_list
+    stations = build_station_list()
+    rivers = rivers_with_station(stations)
+    assert len(stations_by_river(stations)) == len(rivers)
+    assert len(stations_by_river(stations)) < len(stations)
+    assert type(stations_by_river(stations)) == dict
+    assert type(stations_by_river(stations)['River Cam']) == list
+    assert type(stations_by_river(stations)['River Cam'][0]) == MonitoringStation
     
