@@ -27,6 +27,7 @@ for stationc in Cam:
 for stationt in Thames:
     Thamesnames.append(stationt.name)
 
+
 print(f"Stations on the river Aire are {sorted(Airenames)}")
 print(f"Stations on the river Cam are {sorted(Camnames)}")
 print(f"Stations on the river Thames are {sorted(Thamesnames)}")
