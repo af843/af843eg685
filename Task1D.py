@@ -25,6 +25,7 @@ for stationa, stationc, stationt in zip(Aire, Cam, Thames):
     Camnames.append(stationc.name)
     Thamesnames.append(stationt.name)
 
-print(f"Stations on the river Aire are {sorted(Airenames)}")
-print(f"Stations on the river Cam are {sorted(Camnames)}")
+
+#print(f"Stations on the river Aire are {sorted(Airenames)}")
+#print(f"Stations on the river Cam are {sorted(Camnames)}")
 print(f"Stations on the river Thames are {sorted(Thamesnames)}")
