@@ -24,4 +24,3 @@ def test_stations_by_river():
     assert type(stations_by_river(stations)) == dict
     assert type(stations_by_river(stations)['River Cam']) == list
     assert type(stations_by_river(stations)['River Cam'][0]) == MonitoringStation
-    
