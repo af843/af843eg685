@@ -69,4 +69,4 @@ def test_stations_by_river():
     assert len(stations_by_river(stations)) < len(stations)
     assert type(stations_by_river(stations)) == dict
     assert type(stations_by_river(stations)['River Cam']) == list
-    assert type(stations_by_river(stations)['Rive
+    assert type(stations_by_river(stations)['River Cam
