@@ -12,6 +12,7 @@ from .utils import sorted_by_key  # noqa
 
 
 def stations_by_distance(stations, p):
+    from haversine import haversine, Unit
     """ this function calculates the distance of a station to a position with coordinate p
         haversine method is used to calculate distance here
         return a list of tuples (station_name,distance_to_p) and the list is sorted by distance

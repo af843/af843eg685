@@ -44,7 +44,9 @@ class MonitoringStation:
         checks the typical high/low range data for consistency. 
         The method should return True if the data is consistent and False if the data is inconsistent or unavailable.
         """
-        if self.typical_range == None or self.typical_range[0] > self.typical_range[1]:
+        if self.typical_range == None:
+            return False
+        elif self.typical_range[0] > self.typical_range[1]:
             return False
         else:
             return True
