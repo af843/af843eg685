@@ -50,16 +50,16 @@ class MonitoringStation:
             return False
         else:
             return True
-    
-    # returns current water level as a relative value adjusted to the typical range.
-    # uses a try:,except: to catch issues with data being missing or incorrectly formatted.
     def relative_water_level(self):
-        if self.latest_level == None:
+        """
+        a ratio of 1.0 corresponds to a level at the typical high 
+        and a ratio of 0.0 corresponds to a level at the typical low
+        """
+        if self.latest_level == None and self.typical_range_consistent() == True:
             return None
         else:
-            return (self.latest_level - self.typical_range[0])/(self.typical_range[1] - self.typical_range[0])
+            return (self.latest_level-self.typical_range(0))/(self.typical_range[1]-self.typical_range[0])
 
-        
 def inconsistent_typical_range_stations(stations):
     """
     a function that, given a list of station objects, returns a list of stations that have inconsistent data
