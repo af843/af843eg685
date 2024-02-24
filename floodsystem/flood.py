@@ -16,3 +16,14 @@ def stations_level_over_threshold(stations, tol):
     result = sorted_by_key(result,1)
     result.reverse()
     return result
+
+def stations_highest_rel_level(stations,N):
+    output = []
+    stationssorted = stations_level_over_threshold(stations,-9999)
+    for i in range(N):
+        if stationssorted[i][0].typical_range_consistent == False:
+            N += 1
+        else:
+            output.append(stationssorted[i])
+    return output
+            
