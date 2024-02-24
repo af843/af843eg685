@@ -5,7 +5,7 @@ from floodsystem.stationdata import update_water_levels
 # create list for stations
 stations = build_station_list()
 
-# get latest level for ewach station
+# get latest level for each station
 update_water_levels(stations)
 
 # print results in descending order
