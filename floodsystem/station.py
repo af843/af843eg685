@@ -55,10 +55,10 @@ class MonitoringStation:
         a ratio of 1.0 corresponds to a level at the typical high 
         and a ratio of 0.0 corresponds to a level at the typical low
         """
-        if self.latest_level == None and self.typical_range_consistent() == True:
+        if self.latest_level == None or self.typical_range_consistent() == False:
             return None
         else:
-            return (self.latest_level-self.typical_range(0))/(self.typical_range[1]-self.typical_range[0])
+            return (self.latest_level-self.typical_range[0])/(self.typical_range[1]-self.typical_range[0])
 
 def inconsistent_typical_range_stations(stations):
     """
