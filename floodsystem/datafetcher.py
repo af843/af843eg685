@@ -138,11 +138,13 @@ def fetch_measure_levels(measure_id, dt):
     # Extract dates and levels
     dates, levels = [], []
     for measure in data['items']:
+        try:
         # Convert date-time string to a datetime object
-        d = dateutil.parser.parse(measure['dateTime'])
-
+            d = dateutil.parser.parse(measure['dateTime'])
         # Append data
-        dates.append(d)
-        levels.append(measure['value'])
+            levels.append(measure['value'])
+            dates.append(d)
+        except:
+            print("a figure is removed")
 
     return dates, levels
