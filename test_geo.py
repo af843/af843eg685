@@ -1,4 +1,4 @@
-from floodsystem.geo import stations_by_distance,stations_within_radius,rivers_with_station,stations_by_river,rivers_by_station_number,stations_by_town
+from floodsystem.geo import stations_by_distance,stations_within_radius,rivers_with_station,stations_by_river,rivers_by_station_number,stations_by_town,stations_of_town,locate_town
 from floodsystem.station import MonitoringStation
 from floodsystem.stationdata import build_station_list
 from haversine import haversine, Unit
@@ -63,3 +63,10 @@ def test_stations_by_town():
     stations = build_station_list()
     assert len(stations_by_town(stations)) < len(stations)
     assert len(stations_by_town([])) == 0
+def test_stations_of_town():
+    stations = build_station_list()
+    assert len(stations_of_town('Cam', stations)) > 0
+def test_locate_town():
+    stations = build_station_list()
+    assert locate_town('Cam',stations)[0] 
+    assert locate_town('Cam',stations)[1] 

@@ -96,4 +96,25 @@ def stations_by_town(stations):
     for station in stations:
         townset.add(station.town)
     return townset
-    
+
+#finds the location of a town by averaging the latitudes and longitudes of the stations with that town
+def locate_town(town,stations):
+    lat = 0
+    long = 0
+    numberofstations = 0
+    for station in stations:
+        if station.town == town:
+            lat += station.coord[0]
+            long += station.coord[1] 
+            numberofstations += 1
+    lat = lat/numberofstations
+    long = long/numberofstations
+    return [lat,long]
+
+# finds and returns all the stations with the town 
+def stations_of_town(town,stations):
+    stationsoftown = []
+    for station in stations:
+        if station.town == town:
+            stationsoftown.append(station)
+    return stationsoftown
