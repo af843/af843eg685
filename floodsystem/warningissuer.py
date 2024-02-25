@@ -9,6 +9,8 @@ from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.stationdata import update_water_levels
 from floodsystem.plot import plot_water_level_with_fit
 from floodsystem.analysis import polyfit
+from floodsystem import geo
+
 
 def marking(relative_level):
     """
@@ -51,21 +53,21 @@ def get_danger_level(stations,time_after,time_before,degree):
     """
     update_water_levels(stations)
     risk_stations = {}
-    for i in range(stations):
-        dates,levels = fetch_measure_levels(i[0].measure_id,dt=datetime.timedelta(days=time_before))
+    for i in stations:
+        dates,levels = fetch_measure_levels(i.measure_id,dt=datetime.timedelta(days=time_before))
         predicted_level = predict_risk_level(i, dates, levels, degree, time_after)
         risk_stations[i.name] = marking(get_relative_predicted_level(i,predicted_level))
     return risk_stations
 
-def flood_predictor(stations):
+def flood_predictor(stations,time_after,time_before,degree):
     towns = list(geo.stations_by_town(stations))
     townstolocations = {}
     townstorisklevel = {}
     for town in towns:
-        townstolocations['town'] = geo.locate_town(town,stations)
-    futurelevels = level_predictor(stations, past_data_depth = 2, distance_into_future = 2, poly_degree = 1)
+        townstolocations[town] = geo.locate_town(town,stations)
+    futurelevels = get_danger_level(stations,time_after,time_before,degree)
     for town in towns:
-        stationsintenk = geo.stations_within_radius(stations,townstolocations['town'],10)
+        stationsintenk = geo.stations_within_radius(stations,townstolocations[town],10)
         futureriskscore = 0
         nonestations = 0
         for station in stationsintenk:
@@ -76,3 +78,4 @@ def flood_predictor(stations):
         averagefutureriskscore = futureriskscore/(len(stationsintenk) - nonestations)        
         townstorisklevel[town] = averagefutureriskscore
     return townstorisklevel
+
