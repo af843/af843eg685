@@ -17,3 +17,14 @@ def test_plot_water_levels():
     for i in data:
         dates,levels = fetch_measure_levels(i[0].measure_id,dt=datetime.timedelta(days=dt))
         plot_water_levels(i[0], dates, levels)
+
+def test_plot_water_level_with_fit():
+    stations = build_station_list()
+    update_water_levels(stations)
+
+    data = stations_level_over_threshold(stations, 0)[0:0]
+    dt = 10
+    for i in data:
+        dates,levels = fetch_measure_levels(i[0].measure_id,dt=datetime.timedelta(days=dt))
+        plot_water_level_with_fit(i[0], dates, levels, 4)
+
