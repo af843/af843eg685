@@ -90,4 +90,10 @@ def rivers_by_station_number(stations, N):
         result.append(list_River_linked_to_station[i])
     return result
 
+# creates a list of towns based on the towns with monitoring stations.
+def stations_by_town(stations):
+    townset = set()
+    for station in stations:
+        townset.add(station.town)
+    return townset
     

@@ -1,4 +1,4 @@
-from floodsystem.geo import stations_by_distance,stations_within_radius,rivers_with_station,stations_by_river,rivers_by_station_number
+from floodsystem.geo import stations_by_distance,stations_within_radius,rivers_with_station,stations_by_river,rivers_by_station_number,stations_by_town
 from floodsystem.station import MonitoringStation
 from floodsystem.stationdata import build_station_list
 from haversine import haversine, Unit
@@ -59,3 +59,7 @@ def test_stations_by_river():
     assert type(stations_by_river(stations)) == dict
     assert type(stations_by_river(stations)['River Cam']) == list
     assert type(stations_by_river(stations)['River Cam'][0]) == MonitoringStation
+def test_stations_by_town():
+    stations = build_station_list()
+    assert len(stations_by_town(stations)) < len(stations)
+    assert len(stations_by_town([])) == 0
