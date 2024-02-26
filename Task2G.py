@@ -21,5 +21,5 @@ for i in result:
     try:
         print(i + " :" + result[i][1])
     except:
-        print(i + " :" + "Not clear")
+        print("Error with a town")
 
