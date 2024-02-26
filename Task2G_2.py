@@ -9,14 +9,12 @@ from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.stationdata import update_water_levels
 from floodsystem.plot import plot_water_level_with_fit
 from floodsystem.analysis import polyfit
-from floodsystem.warningissuer import flood_predictor
+from floodsystem.warningissuer import flood_predictor, flood_predictor_specific
 
 stations = build_station_list()
 
 
-
-result = flood_predictor(stations,2,10,1)
-print("---------------------------------------------------------")
-for i in result:
-    print(i + " :" + result[i][1])
-
+# flood_predictor_specific("Donyatt",stations,2,10,1)
+# flood_predictor_specific("Lower Arncott",stations,2,10,1)
+flood_predictor_specific("Bray",stations,2,10,1)
+# flood_predictor_specific("Knettishall",stations,2,10,1)
