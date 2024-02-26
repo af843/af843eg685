@@ -18,5 +18,8 @@ stations = build_station_list()
 result = flood_predictor(stations,2,10,1)
 print("---------------------------------------------------------")
 for i in result:
-    print(i + " :" + result[i][1])
+    try:
+        print(i + " :" + result[i][1])
+    except:
+        print(i + " :" + "Not clear")
 

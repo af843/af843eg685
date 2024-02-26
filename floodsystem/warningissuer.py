@@ -68,7 +68,9 @@ def get_danger_level(stations,time_after,time_before,degree):
 
 
 def warning(score):
-     if score < 0.75:
+     if score == None:
+          return "Not clear"
+     elif score < 0.75:
           return "Low"
      elif score < 1:
           return "Moderate"
@@ -96,7 +98,10 @@ def flood_predictor(stations,time_after,time_before,degree):
                 nonestations += 1
             else:
                 futureriskscore += futurelevels[station.name]
-        averagefutureriskscore = futureriskscore/(len(stationsintenk) - nonestations)  
+        try:
+            averagefutureriskscore = futureriskscore/(len(stationsintenk) - nonestations)  
+        except:
+            averagefutureriskscore = None
         townstorisklevel[town] = [averagefutureriskscore,warning(averagefutureriskscore)]
     return townstorisklevel
 

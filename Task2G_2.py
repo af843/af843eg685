@@ -14,7 +14,7 @@ from floodsystem.warningissuer import flood_predictor, flood_predictor_specific
 stations = build_station_list()
 
 
-flood_predictor_specific("Donyatt",stations,2,10,1)
-flood_predictor_specific("Lower Arncott",stations,2,10,1)
-flood_predictor_specific("Bray",stations,2,10,1)
-flood_predictor_specific("Knettishall",stations,2,10,1)
+# flood_predictor_specific("Donyatt",stations,2,10,1)
+# flood_predictor_specific("Lower Arncott",stations,2,10,1)
+# flood_predictor_specific("Bray",stations,2,10,1)
+# flood_predictor_specific("Knettishall",stations,2,10,1)
