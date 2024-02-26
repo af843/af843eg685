@@ -54,9 +54,12 @@ def get_danger_level(stations,time_after,time_before,degree):
     update_water_levels(stations)
     risk_stations = {}
     for i in stations:
-        dates,levels = fetch_measure_levels(i.measure_id,dt=datetime.timedelta(days=time_before))
-        predicted_level = predict_risk_level(i, dates, levels, degree, time_after)
-        risk_stations[i.name] = marking(get_relative_predicted_level(i,predicted_level))
+        try:
+            dates,levels = fetch_measure_levels(i.measure_id,dt=datetime.timedelta(days=time_before))
+            predicted_level = predict_risk_level(i, dates, levels, degree, time_after)
+            risk_stations[i.name] = marking(get_relative_predicted_level(i,predicted_level))
+        except:
+            print("a figure is removed")
     return risk_stations
 
 def flood_predictor(stations,time_after,time_before,degree):
