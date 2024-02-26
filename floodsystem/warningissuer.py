@@ -20,13 +20,13 @@ def marking(relative_level):
         return None
     elif relative_level < 1.0:
         return 0
-    elif relative_level >= 1.0 and relative_level < 2.0:
+    elif relative_level >= 1.0 and relative_level < 1.5:
         return 1
-    elif relative_level >= 2.0 and relative_level < 3.0:
+    elif relative_level >= 1.5 and relative_level < 2.0:
         return 2
-    elif relative_level >= 3.0 and relative_level < 4.0:
+    elif relative_level >= 2.0 and relative_level < 2.5:
         return 3
-    elif relative_level >= 4.0:
+    elif relative_level >= 2.5:
         return 4
     
 def predict_risk_level(station, dates, levels, p, time):
@@ -58,6 +58,7 @@ def get_danger_level(stations,time_after,time_before,degree):
             dates,levels = fetch_measure_levels(i.measure_id,dt=datetime.timedelta(days=time_before))
             predicted_level = predict_risk_level(i, dates, levels, degree, time_after)
             risk_stations[i.name] = marking(get_relative_predicted_level(i,predicted_level))
+            print([i.name,marking(get_relative_predicted_level(i,predicted_level))])
         except:
             print("a figure is removed")
     return risk_stations
@@ -74,11 +75,14 @@ def flood_predictor(stations,time_after,time_before,degree):
         futureriskscore = 0
         nonestations = 0
         for station in stationsintenk:
-            if futurelevels[station.name] == None:
+            if futurelevels.get(station.name) == None:
                 nonestations += 1
             else:
                 futureriskscore += futurelevels[station.name]
-        averagefutureriskscore = futureriskscore/(len(stationsintenk) - nonestations)        
-        townstorisklevel[town] = averagefutureriskscore
+        try:
+            averagefutureriskscore = futureriskscore/(len(stationsintenk) - nonestations)      
+            townstorisklevel[town] = averagefutureriskscore
+        except:
+            print("a town is removed")
     return townstorisklevel
 
