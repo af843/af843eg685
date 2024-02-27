@@ -9,6 +9,7 @@ from floodsystem.stationdata import update_water_levels
 from floodsystem.plot import plot_water_level_with_fit
 from floodsystem.warningissuer import marking, predict_risk_level,get_relative_predicted_level,get_danger_level
 from floodsystem.analysis import polyfit
+from floodsystem.warningissuer import flood_predictor
 
 stations = build_station_list()
 update_water_levels(stations)
@@ -23,3 +24,7 @@ dates,levels = fetch_measure_levels(data.measure_id,dt=datetime.timedelta(days=1
 predicted_level = predict_risk_level(data, dates, levels, 1, 2)
 risk_stations[data.name] = marking(get_relative_predicted_level(data,predicted_level))
 print(risk_stations)
+
+def test_flood_predictor():
+    assert flood_predictor([],0,0,0)
+
